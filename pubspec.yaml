@@ -1,0 +1,17 @@
+name: network_cool_client
+description: The foundation for creating a custom network client that enables session management, cookie handling, and precise configuration of server calls.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  http: any
+  mutex: 3.1.0
+
+dev_dependencies:
+  coolint: 2.0.0
+
+flutter:
+  generate: true
