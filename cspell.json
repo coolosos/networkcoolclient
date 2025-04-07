@@ -1,0 +1,11 @@
+{
+        "version": "0.2",
+        "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+        "enableGlobDot": true,
+        "language": "en,es-ES,en-GB",
+        "words": [
+                "coolint"
+        ],
+        "useGitignore": true,
+        "ignorePaths": []
+}
