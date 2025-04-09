@@ -30,6 +30,7 @@ mixin NetworkObservable on BaseClient {
   /// Checks whether the current client is in a specific network state.
   ///
   /// This method returns `true` if the client is in the given state, otherwise `false`.
+  @protected
   bool _isUnderState({
     required NetworkState state,
   }) {
@@ -41,6 +42,7 @@ mixin NetworkObservable on BaseClient {
   ///
   /// This method will only notify observers if the state has changed, and it will
   /// prevent unnecessary notifications if the client is already in the new state.
+  @protected
   void _changeNetworkStatus({
     required NetworkState newState,
   }) {
@@ -69,6 +71,7 @@ mixin NetworkObservable on BaseClient {
   ///
   /// This helper method checks whether the previous state was `notLoggedIn` and
   /// if the new state is not `reLogged`, which might indicate a need for a re-login.
+  @protected
   bool _isActuallyReLogin(NetworkState previousState, NetworkState newState) {
     return previousState == NetworkState.notLoggedIn &&
         newState != NetworkState.reLogged;
@@ -78,6 +81,7 @@ mixin NetworkObservable on BaseClient {
   ///
   /// This method is called when an HTTP response is received. It creates a detailed
   /// `OnResponse` object and notifies all observers about the response.
+  @protected
   void _onResponse({
     required Response response,
   }) {
@@ -102,6 +106,7 @@ mixin NetworkObservable on BaseClient {
   ///
   /// This method is called when an error occurs during the network request. It
   /// notifies all observers about the error, passing along the error and stack trace.
+  @protected
   void _onError({
     required Object error,
     StackTrace? stackTrace,
