@@ -33,15 +33,18 @@ abstract base class SessionClient extends HttpClient {
 
   /// Abstract method to retrieve the bearer token used for authentication.
   /// Returns the bearer token as a string, or null if it is unavailable.
+  @protected
   Future<String?> getBearerToken();
 
   /// Abstract method to renew the session by refreshing the authentication token.
   /// Returns true if the session was successfully renewed, false otherwise.
+  @protected
   Future<bool> renewSession();
 
   /// Checks if the response indicates an invalid session (unauthorized).
   /// [response] - The HTTP response to check.
   /// Returns true if the response status code is 401 (Unauthorized), indicating the session is invalid.
+  @protected
   bool checkIfFailedForInvalidSession(Response response) {
     return response.statusCode == HttpStatus.unauthorized;
   }
@@ -49,6 +52,7 @@ abstract base class SessionClient extends HttpClient {
   /// Prepares the headers for a request, ensuring they include valid session tokens and cookies.
   /// [headers] - Custom headers to be included in the request.
   /// Returns a map of headers, including any session-related headers (Authorization and Cookie).
+  @protected
   Future<Map<String, String>> sessionHeaders(
     Map<String, String>? headers,
   ) async {
@@ -89,6 +93,7 @@ abstract base class SessionClient extends HttpClient {
   /// [send] - The function that sends the request with the provided headers.
   /// Returns the HTTP response from the request.
   @override
+  @protected
   Future<Response> executeRequest({
     required Map<String, String>? headers,
     required Future<Response> Function(Map<String, String> headers) send,
