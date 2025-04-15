@@ -53,6 +53,7 @@ abstract base class SessionClient extends HttpClient {
   /// [headers] - Custom headers to be included in the request.
   /// Returns a map of headers, including any session-related headers (Authorization and Cookie).
   @protected
+  @visibleForTesting
   Future<Map<String, String>> sessionHeaders(
     Map<String, String>? headers,
   ) async {

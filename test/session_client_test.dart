@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show HttpHeaders;
 
 import 'package:network_cool_client/network_cool_client.dart';
 
@@ -6,23 +7,80 @@ import 'package:test/test.dart';
 
 import 'clients/mock_client_exception.dart';
 import 'clients/mock_infinity_request_client.dart';
+import 'clients/mock_session_broke_exception.dart';
 import 'clients/mock_socket_exception.dart';
 import 'clients/mock_success_request_client.dart';
 import 'clients/mock_undermantenance_client_exception.dart';
 
-final class TestHttpClient extends HttpClient {
-  TestHttpClient({
-    required super.client,
+final class TestSessionClient extends SessionClient {
+  TestSessionClient({
     required super.id,
-    super.timeout = const Duration(milliseconds: 200),
+    required super.client,
+    super.timeout = const Duration(
+      milliseconds: 200,
+    ),
   });
+
+  @override
+  Future<String?> getBearerToken() async {
+    return 'BearToken';
+  }
+
+  @override
+  Future<bool> renewSession() async {
+    return true;
+  }
+}
+
+final class TestSessionBearerClient extends SessionClient {
+  TestSessionBearerClient({
+    required super.id,
+    required super.client,
+    required this.bearerToken,
+    super.timeout = const Duration(
+      milliseconds: 200,
+    ),
+    super.defaultHeaders,
+  });
+
+  final String? bearerToken;
+
+  @override
+  Future<String?> getBearerToken() async {
+    return bearerToken;
+  }
+
+  @override
+  Future<bool> renewSession() async {
+    return true;
+  }
+}
+
+final class TestSessionBrokenClient extends SessionClient {
+  TestSessionBrokenClient({
+    required super.id,
+    required super.client,
+    super.timeout = const Duration(
+      milliseconds: 200,
+    ),
+  });
+
+  @override
+  Future<String?> getBearerToken() async {
+    return 'BearToken';
+  }
+
+  @override
+  Future<bool> renewSession() async {
+    return false;
+  }
 }
 
 void main() {
   group(
     'Timeout',
     () {
-      final TestHttpClient testTimeOutClient = TestHttpClient(
+      final TestSessionClient testTimeOutClient = TestSessionClient(
         client: MockInfinityRequestClient(),
         id: 'testTimeOutClient',
       );
@@ -115,7 +173,7 @@ void main() {
   group(
     'Successful',
     () {
-      final TestHttpClient testSuccessClient = TestHttpClient(
+      final TestSessionClient testSuccessClient = TestSessionClient(
         client: MockSuccessRequestClient(),
         id: 'MockSuccessRequestClient',
       );
@@ -202,7 +260,7 @@ void main() {
   group(
     'Socket Exception',
     () {
-      final TestHttpClient testSocketException = TestHttpClient(
+      final TestSessionClient testSocketException = TestSessionClient(
         client: MockSocketException(),
         id: 'MockSocketException',
       );
@@ -295,7 +353,7 @@ void main() {
   group(
     'Client Exception',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final TestSessionClient testClientException = TestSessionClient(
         client: MockClientException(),
         id: 'MockClientException',
       );
@@ -388,7 +446,7 @@ void main() {
   group(
     'Client Undermantenance',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final TestSessionClient testClientException = TestSessionClient(
         client: MockUndermantenanceClientException(),
         id: 'MockUndermantenanceClientException',
       );
@@ -473,6 +531,262 @@ void main() {
             throwsA(
               isA<ServerAvailabilityException>(),
             ),
+          );
+        },
+      );
+    },
+  );
+  group(
+    'Client Session Broke Fixed',
+    () {
+      final mockBrokenSession = MockSessionBrokeException();
+      final TestSessionClient testClientException = TestSessionClient(
+        client: mockBrokenSession,
+        id: 'MockSessionBrokeException',
+      );
+      test(
+        'Get client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.get(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Post client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.post(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Delete client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.delete(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Head client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.head(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Patch client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.patch(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Put client SessionBroke Fixed',
+        () async {
+          final response = await testClientException.put(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          expect(mockBrokenSession.isSecondTime, true);
+          expect(response.statusCode, 200);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+    },
+  );
+  group(
+    'Client Session Broken',
+    () {
+      final mockBrokenSession = MockSessionBrokeException();
+      final TestSessionBrokenClient testClientException =
+          TestSessionBrokenClient(
+        client: mockBrokenSession,
+        id: 'MockSessionBrokeException',
+      );
+      test(
+        'Get client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.get(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Post client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.post(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Delete client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.delete(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Head client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.head(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Patch client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.patch(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+      test(
+        'Put client Session Broken',
+        () async {
+          await expectLater(
+            () => testClientException.put(
+              Uri.dataFromString('test_dart.es'),
+              headers: {'key': 'key'},
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+          mockBrokenSession.refreshSecondTime();
+        },
+      );
+    },
+  );
+
+  group(
+    'Session header with Bearer Token',
+    () {
+      final defaultHeader = {'test': 'test'};
+      test(
+        'Bearer token Fail',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: MockSessionBrokeException(),
+            id: 'MockSessionBrokeException',
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{});
+        },
+      );
+      test(
+        'Bearer token Fail with other headers',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: MockSessionBrokeException(),
+            id: 'MockSessionBrokeException',
+          );
+          final data = await testClientException.sessionHeaders(defaultHeader);
+          expect(data, defaultHeader);
+        },
+      );
+
+      test(
+        'Bearer token Success',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: 'token',
+            client: MockSessionBrokeException(),
+            id: 'MockSessionBrokeException',
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{
+            HttpHeaders.authorizationHeader: 'Bearer token',
+          });
+        },
+      );
+      test(
+        'Bearer token Success with defaultHeaders',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: 'token',
+            client: MockSessionBrokeException(),
+            id: 'MockSessionBrokeException',
+          );
+          final data = await testClientException.sessionHeaders(defaultHeader);
+          expect(
+            data,
+            <String, String>{
+              HttpHeaders.authorizationHeader: 'Bearer token',
+            }..addAll(defaultHeader),
           );
         },
       );
