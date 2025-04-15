@@ -7,6 +7,7 @@ import 'package:test/test.dart';
 
 import 'clients/mock_client_exception.dart';
 import 'clients/mock_infinity_request_client.dart';
+import 'clients/mock_save_cookie_client.dart';
 import 'clients/mock_session_broke_exception.dart';
 import 'clients/mock_socket_exception.dart';
 import 'clients/mock_success_request_client.dart';
@@ -788,6 +789,121 @@ void main() {
               HttpHeaders.authorizationHeader: 'Bearer token',
             }..addAll(defaultHeader),
           );
+        },
+      );
+    },
+  );
+  group(
+    'Cookie saved',
+    () {
+      const String cookie = 'cookie';
+      final client = MockSaveCookieClient(cookie: cookie);
+      test(
+        'Get Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.get(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
+        },
+      );
+      test(
+        'Post Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.post(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
+        },
+      );
+      test(
+        'Delete Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.delete(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
+        },
+      );
+      test(
+        'Head Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.head(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
+        },
+      );
+      test(
+        'Patch Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.patch(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
+        },
+      );
+      test(
+        'Put Cookie saved',
+        () async {
+          final TestSessionBearerClient testClientException =
+              TestSessionBearerClient(
+            bearerToken: null,
+            client: client,
+            id: 'MockSaveCookieClient',
+          );
+          final response = await testClientException.put(
+            Uri.dataFromString('test_dart.es'),
+            headers: {'key': 'key'},
+          );
+          final data = await testClientException.sessionHeaders(null);
+          expect(data, <String, String>{HttpHeaders.cookieHeader: cookie});
+          expect(response.statusCode, 200);
         },
       );
     },
