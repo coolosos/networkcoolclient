@@ -1,7 +1,7 @@
 import 'dart:io';
 
 Future<void> main(List<String> arguments) async {
-  final coverageToCheck = double.tryParse(arguments.first);
+  final double coverageToCheck = double.tryParse(arguments.first) ?? 0;
 
   final file = File('coverage/lcov.info');
 
