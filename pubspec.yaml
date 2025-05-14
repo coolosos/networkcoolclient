@@ -12,5 +12,5 @@ dependencies:
   mutex: 3.1.0
 
 dev_dependencies:
-  coolint: 2.0.0
+  coolint: 2.0.1
   test: ^1.25.15
