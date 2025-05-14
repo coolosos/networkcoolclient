@@ -1,5 +1,7 @@
 import 'dart:io';
 
+const double coverageToCheck = 90.0;
+
 Future<void> main() async {
   final file = File('coverage/lcov.info');
 
@@ -32,8 +34,8 @@ Future<void> main() async {
   final rounded = coveragePercent.toStringAsFixed(2);
   print('✅ Coverage: $rounded%');
 
-  if (coveragePercent < 90.0) {
-    stderr.writeln('❌ Coverage is below 90%.');
+  if (coveragePercent < coverageToCheck) {
+    stderr.writeln('❌ Coverage is below $coverageToCheck%.');
     exit(1);
   }
 }
