@@ -4,8 +4,10 @@ name: Dart
 
 on:
   pull_request:
-    branches: [ "main" ]
-    types: ["ready_for_review"]
+    branches: 
+        - 'main'
+    types: 
+        - ready_for_review
 
 jobs:
   spellcheck: # run the action
