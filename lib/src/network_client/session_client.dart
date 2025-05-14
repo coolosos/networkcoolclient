@@ -148,7 +148,7 @@ abstract base class SessionClient extends HttpClient {
         );
         final exception = NotLoggedInException();
         _onError(
-          error: NotLoggedInException,
+          error: exception,
         );
         throw exception;
       }
