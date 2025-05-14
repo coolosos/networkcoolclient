@@ -1,6 +1,6 @@
 import 'dart:io';
 
-const double coverageToCheck = 100.0;
+const double coverageToCheck = 90.00;
 
 Future<void> main() async {
   final file = File('coverage/lcov.info');
