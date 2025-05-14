@@ -2,8 +2,11 @@ name: Validate
 
 on:
   pull_request:
-    branches: ["main"]
-    types: ["ready_for_review"]
+    branches: 
+      - 'main'
+    types: 
+      - ready_for_review
+      - synchronize
 
 jobs:
   spellcheck: # run the action
