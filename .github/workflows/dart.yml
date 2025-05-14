@@ -8,6 +8,7 @@ on:
         - 'main'
     types: 
         - ready_for_review
+        - synchronize
 
 jobs:
   spellcheck: # run the action
