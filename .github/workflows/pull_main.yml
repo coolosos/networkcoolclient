@@ -9,13 +9,14 @@ on:
 
 jobs:
   spellcheck: 
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
       - uses: streetsidesoftware/cspell-action@v7.0.0
   validate:
     name: Analyse
-    if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
 
     steps:
