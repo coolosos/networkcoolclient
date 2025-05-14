@@ -30,6 +30,7 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// Custom headers are provided by the caller, and default headers (if any) are
   /// merged in. Default headers are only used if the custom headers do not already
   /// specify a value for the same key.
+  @protected
   Map<String, String> initializeHeaders(
     Map<String, String>? customRequestHeaders,
   ) {
@@ -50,6 +51,7 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// This method specifically checks for a 503 Service Unavailable status code, which
   /// indicates that the server is temporarily unavailable.
   @override
+  @protected
   bool checkUnderMaintenance(Response response) {
     return response.statusCode == HttpStatus.serviceUnavailable;
   }
@@ -65,6 +67,7 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// the network state will be updated to `underMaintenance`. If the request fails due to
   /// network issues, the state will be set to `offline`. Any errors are passed to observers.
   @override
+  @protected
   Future<Response> executeRequest({
     required Map<String, String>? headers,
     required Future<Response> Function(Map<String, String> headers) send,
@@ -105,10 +108,6 @@ class HttpClient extends BaseClient with NetworkObservable {
     if (error is ServerAvailabilityException) {
       _changeNetworkStatus(newState: NetworkState.underMaintenance);
     }
-
-    // if (error is TimeoutException) {
-    //   _onError(error: error, stackTrace: stackTrace);
-    // }
 
     _onError(error: error, stackTrace: stackTrace);
   }

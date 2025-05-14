@@ -163,6 +163,7 @@ abstract class BaseClient implements ClientMethods {
   ///
   /// Can be overridden by subclasses to apply custom header processing,
   /// such as injecting default headers or transforming key casing.
+  @protected
   Map<String, String> normalizeHeaders(Map<String, String>? headers) {
     return headers ?? <String, String>{};
   }
