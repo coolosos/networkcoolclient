@@ -10,6 +10,9 @@ mixin NetworkObservable on BaseClient {
   /// A set of observers that will be notified about network state changes.
   static final Set<NetworkObserver> _observers = {};
 
+  ///Determinate if the [BaseClient] contains any observer
+  bool get isObservable => _observers.isNotEmpty;
+
   /// A static map that holds the network state for each client identified by `client.id`.
   static final Map<String, NetworkState> _networkState = {};
 
@@ -140,7 +143,8 @@ mixin NetworkObservable on BaseClient {
   ///
   /// This is useful for cleanup when the client is no longer needed, such as
   /// when disposing of a service or when a client instance is deactivated.
-  void disposeObservers() {
+  @mustCallSuper
+  void dispose() {
     for (var observer in _observers) {
       observer.dispose();
     }

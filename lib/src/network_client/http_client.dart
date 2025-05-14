@@ -109,10 +109,6 @@ class HttpClient extends BaseClient with NetworkObservable {
       _changeNetworkStatus(newState: NetworkState.underMaintenance);
     }
 
-    // if (error is TimeoutException) {
-    //   _onError(error: error, stackTrace: stackTrace);
-    // }
-
     _onError(error: error, stackTrace: stackTrace);
   }
 }
