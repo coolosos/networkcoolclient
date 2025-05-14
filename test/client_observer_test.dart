@@ -99,7 +99,6 @@ void main() {
           );
         },
       );
-  
 
       test(
         'Not logged in exception',
