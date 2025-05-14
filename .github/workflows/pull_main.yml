@@ -1,15 +1,14 @@
 name: Validate
-
 on:
   pull_request:
     branches: 
-      - 'main'
+        - 'main'
     types: 
-      - ready_for_review
-      - synchronize
+        - ready_for_review
+        - synchronize
 
 jobs:
-  spellcheck: # run the action
+  spellcheck: 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
@@ -31,5 +30,3 @@ jobs:
       - run: dart test --coverage=coverage
       - run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=lib
       - run: dart run .github/check_coverage/check_coverage.dart
-      
-      
