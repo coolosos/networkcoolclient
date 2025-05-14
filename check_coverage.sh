@@ -18,6 +18,11 @@ lh=$(grep "LH:" coverage/lcov.info | cut -d: -f2 | paste -sd+ - | bc)
 if [ "$lf" -gt 0 ]; then
   pct=$(awk "BEGIN { printf(\"%.2f\", ($lh/$lf)*100) }")
   echo "Coverage: $pct%"
+  genhtml coverage/lcov.info -o coverage/html
+  open coverage/html/index.html
 else
   echo "No lines found to measure coverage."
 fi
+
+
+

@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 import 'clients/mock_infinity_request_client.dart';
 import 'clients/mock_success_request_client.dart';
-
+import 'observer/client_observer.dart';
 
 final class TestHttpClient extends HttpClient {
   TestHttpClient({
@@ -98,6 +98,34 @@ void main() {
           expect(
             successRequestHttpClient.hashCode > 0,
             true,
+          );
+        },
+      );
+
+      final observer = ClientObserver();
+      final TestHttpClient observerChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
+      test(
+        'on add observer',
+        () async {
+          observerChecker.addObserver(observer);
+          expect(
+            observerChecker.isObservable,
+            true,
+          );
+        },
+      );
+
+      test(
+        'on remove observer',
+        () async {
+          observerChecker.removeObserver(observer);
+          expect(
+            observerChecker.isObservable,
+            false,
           );
         },
       );
