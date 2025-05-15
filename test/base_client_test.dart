@@ -13,10 +13,59 @@ final class TestHttpClient extends HttpClient {
   });
 }
 
+final class BaseClientTest extends BaseClient {
+  BaseClientTest({required super.client, required super.id});
+
+  Map<String, String> headersChange = {};
+
+  @override
+  bool checkUnderMaintenance(Response response) {
+    return false;
+  }
+
+  @override
+  Future<Response> executeRequest({
+    required Map<String, String> headers,
+    required RequestSender send,
+  }) async {
+    headersChange = headers;
+    return Response('body', 200);
+  }
+}
+
 void main() {
   group(
     'Base function',
     () {
+      test(
+        'BaseClientTest normalize function put call headers',
+        () async {
+          final BaseClientTest normalizeClient = BaseClientTest(
+            client: MockSuccessRequestClient(),
+            id: 'normalizeClient',
+          );
+          final newHeaders = {'key': 'key'};
+          await normalizeClient.get(
+            Uri.parse('https://www.google.com/'),
+            headers: newHeaders,
+          );
+
+          expect(
+            normalizeClient.headersChange,
+            newHeaders,
+          );
+          normalizeClient.headersChange = {};
+
+          await normalizeClient.get(
+            Uri.parse('https://www.google.com/'),
+          );
+
+          expect(
+            normalizeClient.headersChange,
+            {},
+          );
+        },
+      );
       test(
         'toString function',
         () async {

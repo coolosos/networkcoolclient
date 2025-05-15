@@ -15,7 +15,28 @@ final class TestHttpClient extends HttpClient {
     required super.client,
     required super.id,
     super.timeout = const Duration(milliseconds: 200),
+    super.defaultHeaders,
   });
+}
+
+final class NormalizeTestHttpClient extends TestHttpClient {
+  NormalizeTestHttpClient({
+    required super.client,
+    required super.id,
+    super.timeout = const Duration(milliseconds: 200),
+    super.defaultHeaders,
+  });
+
+  Map<String, String> headersChange = {};
+
+  @override
+  Future<Response> executeRequest({
+    required Map<String, String> headers,
+    required Future<Response> Function(Map<String, String> headers) send,
+  }) {
+    headersChange = headers;
+    return super.executeRequest(headers: headers, send: send);
+  }
 }
 
 void main() {
@@ -473,6 +494,36 @@ void main() {
             throwsA(
               isA<ServerAvailabilityException>(),
             ),
+          );
+        },
+      );
+    },
+  );
+
+  group(
+    'Normalize headers',
+    () {
+      test(
+        'Test normalize function',
+        () async {
+          final NormalizeTestHttpClient normalizeHeaders =
+              NormalizeTestHttpClient(
+            client: MockSuccessRequestClient(),
+            id: 'normalizeHeaders',
+            defaultHeaders: {
+              'key': 'key',
+              'default': 'true',
+            },
+          );
+          final newHeaders = {'key': 'callHeader', 'call': 'done'};
+          await normalizeHeaders.get(
+            Uri.parse('https://www.google.com/'),
+            headers: newHeaders,
+          );
+
+          expect(
+            normalizeHeaders.headersChange,
+            {'key': 'callHeader', 'default': 'true', 'call': 'done'},
           );
         },
       );
