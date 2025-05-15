@@ -30,20 +30,14 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// Custom headers are provided by the caller, and default headers (if any) are
   /// merged in. Default headers are only used if the custom headers do not already
   /// specify a value for the same key.
-  @protected
-  Map<String, String> initializeHeaders(
-    Map<String, String>? customRequestHeaders,
-  ) {
-    final Map<String, String> headers = Map.of(
-      customRequestHeaders ?? {},
-    );
+  @override
+  Map<String, String> normalizeHeaders(Map<String, String>? headers) {
+    final Map<String, String> clientHeaders = Map.of(defaultHeaders ?? {});
 
-    // Add default headers if they are not already present in customRequestHeaders.
-    if (defaultHeaders case final defaultHeaders?) {
-      headers.addAll(defaultHeaders);
-    }
+    // Override the [defaultHeaders] with the headers send by the execution.
+    clientHeaders.addAll(headers ?? {});
 
-    return headers;
+    return clientHeaders;
   }
 
   /// Checks if the server is under maintenance based on the HTTP response status code.
@@ -69,13 +63,12 @@ class HttpClient extends BaseClient with NetworkObservable {
   @override
   @protected
   Future<Response> executeRequest({
-    required Map<String, String>? headers,
+    required Map<String, String> headers,
     required Future<Response> Function(Map<String, String> headers) send,
   }) async {
     try {
       // Attempt the request and apply the timeout.
-      final response =
-          await send.call(initializeHeaders(headers)).timeout(timeout);
+      final response = await send.call(headers).timeout(timeout);
 
       // Notify observers of the response.
       _onResponse(response: response);

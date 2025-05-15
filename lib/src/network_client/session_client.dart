@@ -96,7 +96,7 @@ abstract base class SessionClient extends HttpClient {
   @override
   @protected
   Future<Response> executeRequest({
-    required Map<String, String>? headers,
+    required Map<String, String> headers,
     required Future<Response> Function(Map<String, String> headers) send,
   }) async {
     // Prepare session headers (Authorization and Cookie).
