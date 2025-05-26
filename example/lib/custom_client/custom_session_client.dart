@@ -1,6 +1,6 @@
 import 'package:network_cool_client/network_cool_client.dart';
 
-import 'observer/custom_network_observer.dart';
+import '../observer/custom_network_observer.dart';
 
 final class MySessionClient extends SessionClient {
   MySessionClient()
