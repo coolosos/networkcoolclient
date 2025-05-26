@@ -4,8 +4,9 @@
         "enableGlobDot": true,
         "language": "en,es-ES,en-GB",
         "words": [
-                "github",
                 "coolint",
+                "datasource",
+                "github",
                 "undermantenance",
                 "Undermantenance"
         ],
