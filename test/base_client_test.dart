@@ -157,6 +157,11 @@ void main() {
         id: 'observerChecker',
       );
 
+      final TestHttpClient noObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
       test(
         'on add observer',
         () async {
@@ -165,6 +170,7 @@ void main() {
             observerChecker.isObservable,
             true,
           );
+          expect(noObserverChecker.isObservable, false);
         },
       );
 

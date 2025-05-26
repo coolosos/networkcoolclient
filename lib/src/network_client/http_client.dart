@@ -12,12 +12,16 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// [id] is a unique identifier for this client instance.
   /// [timeout] specifies the duration to wait for a server response before timing out (default is 30 seconds).
   /// [defaultHeaders] contains headers that will be sent with every request, but can be overridden by custom headers.
-  const HttpClient({
+  HttpClient({
     required super.client,
     required super.id,
     this.timeout = const Duration(seconds: 30),
     this.defaultHeaders,
-  });
+    Set<NetworkObserver>? observers,
+  }) : _observers = observers ?? {};
+
+  @override
+  final Set<NetworkObserver> _observers;
 
   /// Timeout duration for HTTP requests, defaults to 30 seconds.
   final Duration timeout;

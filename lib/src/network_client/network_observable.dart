@@ -8,7 +8,7 @@ part of 'base_client.dart';
 /// It also provides hooks to respond to HTTP responses and errors.
 mixin NetworkObservable on BaseClient {
   /// A set of observers that will be notified about network state changes.
-  static final Set<NetworkObserver> _observers = {};
+  Set<NetworkObserver> get _observers;
 
   ///Determinate if the [BaseClient] contains any observer
   bool get isObservable => _observers.isNotEmpty;
