@@ -157,6 +157,11 @@ void main() {
         id: 'observerChecker',
       );
 
+      final TestHttpClient noObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
       test(
         'on add observer',
         () async {
@@ -165,6 +170,7 @@ void main() {
             observerChecker.isObservable,
             true,
           );
+          expect(noObserverChecker.isObservable, false);
         },
       );
 
@@ -175,6 +181,63 @@ void main() {
           expect(
             observerChecker.isObservable,
             false,
+          );
+        },
+      );
+
+      final globalObserver = ClientObserver();
+      final TestHttpClient globalObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
+      final TestHttpClient noGlobalObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
+      test(
+        'on add global observer',
+        () async {
+          GlobalNetworkObservable.addObserver(globalObserver);
+          expect(
+            globalObserverChecker.isObservable,
+            false,
+          );
+          expect(noGlobalObserverChecker.isObservable, false);
+
+          expect(
+            globalObserverChecker.isGlobalObservable,
+            true,
+          );
+          expect(noGlobalObserverChecker.isGlobalObservable, true);
+        },
+      );
+
+      test(
+        'on remove global observer',
+        () async {
+          GlobalNetworkObservable.removeObserver(globalObserver);
+          expect(
+            globalObserverChecker.isObservable,
+            false,
+          );
+
+          expect(
+            noGlobalObserverChecker.isGlobalObservable,
+            false,
+          );
+        },
+      );
+
+      test(
+        'on dispose global observer',
+        () async {
+          GlobalNetworkObservable.addObserver(globalObserver);
+          GlobalNetworkObservable.dispose();
+          expect(
+            GlobalNetworkObservable.observers,
+            <NetworkObserver>{},
           );
         },
       );
