@@ -36,8 +36,11 @@ abstract base class SessionClient extends HttpClient {
   @protected
   Future<String?> getBearerToken();
 
-  /// Abstract method to renew the session by refreshing the authentication token.
-  /// Returns true if the session was successfully renewed, false otherwise.
+  /// Attempts to renew the session by refreshing the authentication token.
+  ///
+  /// Returns `true` if the session was successfully renewed, allowing the original
+  /// request to be retried. Returns `false` if the renewal failed, typically indicating
+  /// that the user is no longer authenticated.
   @protected
   Future<bool> renewSession();
 

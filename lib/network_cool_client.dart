@@ -6,4 +6,4 @@ export 'src/network_observer/on_response.dart';
 export 'src/network_observer/network_observer.dart';
 
 export 'package:http/http.dart' hide BaseClient;
-export 'dart:io' show SocketException, HttpException;
+export 'dart:io' show SocketException, HttpException, HttpHeaders, ContentType;

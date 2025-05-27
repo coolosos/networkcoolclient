@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io' show HttpHeaders;
 
 import 'package:network_cool_client/network_cool_client.dart';
 
