@@ -6,6 +6,7 @@ on:
     types: 
         - ready_for_review
         - synchronize
+        - opened
 
 jobs:
   spellcheck: 
