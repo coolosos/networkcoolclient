@@ -184,6 +184,51 @@ void main() {
           );
         },
       );
+
+      final globalObserver = ClientObserver();
+      final TestHttpClient globalObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
+      final TestHttpClient noGlobalObserverChecker = TestHttpClient(
+        client: MockSuccessRequestClient(),
+        id: 'observerChecker',
+      );
+
+      test(
+        'on add global observer',
+        () async {
+          GlobalNetworkObservable.addObserver(globalObserver);
+          expect(
+            globalObserverChecker.isObservable,
+            false,
+          );
+          expect(noGlobalObserverChecker.isObservable, false);
+
+          expect(
+            globalObserverChecker.isGlobalObservable,
+            true,
+          );
+          expect(noGlobalObserverChecker.isGlobalObservable, true);
+        },
+      );
+
+      test(
+        'on remove global observer',
+        () async {
+          GlobalNetworkObservable.removeObserver(globalObserver);
+          expect(
+            globalObserverChecker.isObservable,
+            false,
+          );
+
+          expect(
+            noGlobalObserverChecker.isGlobalObservable,
+            false,
+          );
+        },
+      );
     },
   );
 }
