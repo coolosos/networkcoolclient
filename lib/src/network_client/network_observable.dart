@@ -190,7 +190,7 @@ final class GlobalNetworkObservable {
   ///
   /// This method should be called when global observation is no longer needed,
   /// such as during application shutdown or test teardown.
-  void dispose() {
+  static void dispose() {
     for (var observer in _observers) {
       observer.dispose();
     }

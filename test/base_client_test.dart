@@ -229,6 +229,18 @@ void main() {
           );
         },
       );
+
+      test(
+        'on dispose global observer',
+        () async {
+          GlobalNetworkObservable.addObserver(globalObserver);
+          GlobalNetworkObservable.dispose();
+          expect(
+            GlobalNetworkObservable.observers,
+            <NetworkObserver>{},
+          );
+        },
+      );
     },
   );
 }
