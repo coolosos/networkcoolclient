@@ -11,12 +11,15 @@ Future<void> main(List<String> args) async {
   sessionClient.addObserver(
     CustomNetworkObserver(
       onNotLoggedIn: () async {
+        // ignore: avoid_print
         print('Not logged in');
       },
       onOffline: () async {
+        // ignore: avoid_print
         print('offline');
       },
       onUndermantenance: () async {
+        // ignore: avoid_print
         print('onUndermantenance');
       },
     ),
@@ -24,7 +27,7 @@ Future<void> main(List<String> args) async {
 
   final noSessionRequest = await client
       .get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-
+  // ignore: avoid_print
   print(
     "Response body from no session ${noSessionRequest.body}\n${noSessionRequest.request?.headers}",
   );

@@ -48,6 +48,7 @@ class CustomNetworkObserver implements NetworkObserver {
     required StackTrace? stackTrace,
     required BaseClient client,
   }) {
+    // ignore: avoid_print
     print('Error handle');
   }
 
@@ -56,6 +57,7 @@ class CustomNetworkObserver implements NetworkObserver {
     required OnResponse response,
     required BaseClient client,
   }) {
+    // ignore: avoid_print
     print(response.body);
   }
 

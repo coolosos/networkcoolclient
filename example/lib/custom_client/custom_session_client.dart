@@ -27,12 +27,15 @@ void main() async {
     ..addObserver(
       CustomNetworkObserver(
         onNotLoggedIn: () async {
+          // ignore: avoid_print
           print('Not logged in');
         },
         onOffline: () async {
+          // ignore: avoid_print
           print('offline');
         },
         onUndermantenance: () async {
+          // ignore: avoid_print
           print('onUndermantenance');
         },
       ),
@@ -41,5 +44,6 @@ void main() async {
   final response = await client
       .get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
 
+  // ignore: avoid_print
   print(response.body);
 }
