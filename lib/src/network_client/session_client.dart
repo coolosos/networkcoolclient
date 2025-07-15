@@ -19,7 +19,7 @@ abstract base class SessionClient extends HttpClient {
   String? _cookie;
 
   /// Mutex used to ensure thread-safe handling of session renewal.
-  Completer? _mutex;
+  Completer? _renewSessionMutex;
 
   /// Saves cookies from the response to maintain session state.
   /// [response] - The HTTP response that may contain cookies.
@@ -99,6 +99,9 @@ abstract base class SessionClient extends HttpClient {
     required Map<String, String> headers,
     required Future<Response> Function(Map<String, String> headers) send,
   }) async {
+    // Wait for the renew session prevent request execution.
+    await _renewSessionMutex?.future;
+
     // Prepare session headers (Authorization and Cookie).
     final head = await sessionHeaders(headers);
 
@@ -136,11 +139,11 @@ abstract base class SessionClient extends HttpClient {
   Future<void> _renewSession() async {
     // Acquire the mutex to ensure thread-safe session renewal.
     // await _mutex.acquire(); //!acquire
-    if (_mutex case final complete?) {
+    if (_renewSessionMutex case final complete?) {
       await complete.future;
       return;
     }
-    _mutex = Completer(); //!acquire
+    _renewSessionMutex = Completer(); //!acquire
 
     try {
       // Attempt to renew the session.
@@ -166,8 +169,8 @@ abstract base class SessionClient extends HttpClient {
       rethrow;
     } finally {
       // Release the mutex once the session renewal attempt is complete.
-      _mutex?.complete();
-      _mutex = null;
+      _renewSessionMutex?.complete();
+      _renewSessionMutex = null;
       // _mutex.release(); //!release
     }
   }
