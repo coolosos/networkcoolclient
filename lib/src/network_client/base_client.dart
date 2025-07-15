@@ -4,8 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show SocketException, HttpStatus, HttpHeaders;
 
-import 'package:mutex/mutex.dart';
-
 import 'package:http/http.dart';
 import '../network_observer/network_observer.dart';
 import '../network_observer/on_response.dart';
