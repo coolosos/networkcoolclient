@@ -2,14 +2,14 @@ import 'package:http/src/response.dart';
 
 import 'mock_client.dart';
 
-final class MockNoAutoriceRequestClient extends MockClient {
+final class MockUnauthorizedRequestClient extends MockClient {
   Response _response = Response('body', 401);
 
   void changeToSuccess() {
     _response = Response('body', 200);
   }
 
-  void changeToNoAutorice() {
+  void changeToUnauthorized() {
     _response = Response('body', 401);
   }
 

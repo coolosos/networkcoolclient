@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:network_cool_client/network_cool_client.dart';
 import 'package:test/test.dart';
 
-import 'clients/mock_no_autorice_request_client.dart';
+import 'clients/mock_unauthorized_request_client.dart';
 
 final class TestSessionBearerClient extends SessionClient {
   TestSessionBearerClient({
@@ -33,7 +33,7 @@ final class TestSessionBearerClient extends SessionClient {
 }
 
 double numberOfExecution = 0;
-final client = MockNoAutoriceRequestClient();
+final client = MockUnauthorizedRequestClient();
 
 void main() {
   group(
@@ -75,7 +75,7 @@ void main() {
         },
       );
       numberOfExecution = 0;
-      client.changeToNoAutorice();
+      client.changeToUnauthorized();
 
       test(
         'Multiple renew token',
@@ -97,8 +97,8 @@ void main() {
             const Duration(milliseconds: 500),
           );
 
-          /// Change to no autorice for get the renew token again
-          client.changeToNoAutorice();
+          /// Change to unauthorized for get the renew token again
+          client.changeToUnauthorized();
 
           await testConditionRace.get(
             Uri.dataFromString('test_dart2.es'),
