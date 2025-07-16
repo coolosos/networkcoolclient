@@ -137,12 +137,13 @@ abstract base class SessionClient extends HttpClient {
   /// Throws [NotLoggedInException] if session renewal fails.
   //! Will throw NotLoggedInException if session renewal fails
   Future<void> _renewSession() async {
-    // Acquire the mutex to ensure thread-safe session renewal.
-    // await _mutex.acquire(); //!acquire
+    // Stop execution prevent condition race renewing the token
     if (_renewSessionMutex case final complete?) {
       await complete.future;
       return;
     }
+
+    // Acquire the mutex to ensure thread-safe session renewal.
     _renewSessionMutex = Completer(); //!acquire
 
     try {
@@ -171,7 +172,6 @@ abstract base class SessionClient extends HttpClient {
       // Release the mutex once the session renewal attempt is complete.
       _renewSessionMutex?.complete();
       _renewSessionMutex = null;
-      // _mutex.release(); //!release
     }
   }
 }
