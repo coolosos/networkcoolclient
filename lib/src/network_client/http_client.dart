@@ -91,20 +91,21 @@ class HttpClient extends BaseClient with NetworkObservable {
 
   /// Handles errors, updating network status and notifying observers.
   void _handleErrors(Object error, StackTrace? stackTrace) {
-    NetworkException? exception;
     // Determine the network state based on the error type.
     final isOffline = error is SocketException || error is ClientException;
     if (isOffline) {
       _changeNetworkStatus(newState: NetworkState.offline);
-      exception = NetworkAvailabilityException();
+      return _onError(
+        error: NetworkAvailabilityException(),
+        stackTrace: stackTrace,
+      );
     }
 
     ///Determine the case when the server is under maintenance.
     if (error is ServerAvailabilityException) {
       _changeNetworkStatus(newState: NetworkState.underMaintenance);
-      exception = ServerAvailabilityException();
     }
 
-    _onError(error: exception ?? error, stackTrace: stackTrace);
+    _onError(error: error, stackTrace: stackTrace);
   }
 }
