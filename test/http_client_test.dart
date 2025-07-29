@@ -236,7 +236,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -250,7 +250,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -264,7 +264,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -278,7 +278,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -292,7 +292,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -306,7 +306,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<SocketException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -329,7 +329,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -343,7 +343,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -357,7 +357,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -371,7 +371,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -385,7 +385,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
@@ -399,7 +399,7 @@ void main() {
               headers: {'key': 'key'},
             ),
             throwsA(
-              isA<ClientException>(),
+              isA<NetworkAvailabilityException>(),
             ),
           );
         },
