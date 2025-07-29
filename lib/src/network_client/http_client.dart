@@ -106,7 +106,7 @@ class HttpClient extends BaseClient with NetworkObservable {
     ///Determine the case when the server is under maintenance.
     if (error is ServerAvailabilityException) {
       _changeNetworkStatus(newState: NetworkState.underMaintenance);
-      exception = NetworkAvailabilityException();
+      exception = ServerAvailabilityException();
     }
 
     _onError(error: error, stackTrace: stackTrace);
