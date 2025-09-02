@@ -4,8 +4,11 @@
         "enableGlobDot": true,
         "language": "en,es-ES,en-GB",
         "words": [
-                "github",
                 "coolint",
+                "Coolosos",
+                "datasource",
+                "github",
+                "pubspec",
                 "undermantenance",
                 "Undermantenance"
         ],
