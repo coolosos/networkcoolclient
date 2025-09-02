@@ -8,11 +8,13 @@ abstract base class SessionClient extends HttpClient {
   /// [client] - The actual HTTP client used to send requests.
   /// [timeout] - The timeout duration for HTTP requests, default is 30 seconds.
   /// [defaultHeaders] - Default headers to be sent with every request.
+  /// [observers] - Observers that listener every request.
   SessionClient({
     required super.id,
     required super.client,
     super.timeout = const Duration(seconds: 30),
     super.defaultHeaders,
+    super.observers,
   });
 
   /// The cookie received from the server, used for maintaining session.
@@ -36,8 +38,11 @@ abstract base class SessionClient extends HttpClient {
   @protected
   Future<String?> getBearerToken();
 
-  /// Abstract method to renew the session by refreshing the authentication token.
-  /// Returns true if the session was successfully renewed, false otherwise.
+  /// Attempts to renew the session by refreshing the authentication token.
+  ///
+  /// Returns `true` if the session was successfully renewed, allowing the original
+  /// request to be retried. Returns `false` if the renewal failed, typically indicating
+  /// that the user is no longer authenticated.
   @protected
   Future<bool> renewSession();
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:network_cool_client/network_cool_client.dart';
 
 import 'mock_client.dart';
