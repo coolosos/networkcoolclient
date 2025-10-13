@@ -37,12 +37,9 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// specify a value for the same key.
   @override
   Map<String, String> normalizeHeaders(Map<String, String>? headers) {
-    final clientHeaders = Map<String, String>.of(defaultHeaders ?? {});
-
-    // Override the [defaultHeaders] with the headers send by the execution.
-    clientHeaders.addAll(headers ?? {});
-
-    return clientHeaders;
+    return Map<String, String>.of(defaultHeaders ?? {})
+      // Override the [defaultHeaders] with the headers send by the execution.
+      ..addAll(headers ?? {});
   }
 
   /// Checks if the server is under maintenance based on the HTTP response status code.
@@ -73,7 +70,7 @@ class HttpClient extends BaseClient with NetworkObservable {
   }) async {
     try {
       // Attempt the request and apply the timeout.
-      final response = await send.call(headers).timeout(timeout);
+      final response = await send(headers).timeout(timeout);
 
       // Notify observers of the response.
       _onResponse(response: response);

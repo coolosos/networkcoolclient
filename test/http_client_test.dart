@@ -19,6 +19,7 @@ final class TestHttpClient extends HttpClient {
   });
 }
 
+// ignore: must_be_immutable reason: test
 final class NormalizeTestHttpClient extends TestHttpClient {
   NormalizeTestHttpClient({
     required super.client,
@@ -506,8 +507,7 @@ void main() {
       test(
         'Test normalize function',
         () async {
-          final normalizeHeaders =
-              NormalizeTestHttpClient(
+          final normalizeHeaders = NormalizeTestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'normalizeHeaders',
             defaultHeaders: const {

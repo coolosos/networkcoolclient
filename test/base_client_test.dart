@@ -13,6 +13,7 @@ final class TestHttpClient extends HttpClient {
   });
 }
 
+// ignore: must_be_immutable reason: test
 final class BaseClientTest extends BaseClient {
   BaseClientTest({required super.client, required super.id});
 
@@ -123,8 +124,7 @@ void main() {
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
-          final successRequestHttpClientIdentical =
-              TestHttpClient(
+          final successRequestHttpClientIdentical = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );

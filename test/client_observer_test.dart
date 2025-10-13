@@ -87,8 +87,9 @@ void main() {
           final underMantenance = TestHttpClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
-          )..addObserver(observer);
-          underMantenance.dispose();
+          )
+            ..addObserver(observer)
+            ..dispose();
           expect(
             observer.callingActions.contains(ClientObserverAction.onDispose),
             true,
@@ -105,8 +106,7 @@ void main() {
         () async {
           final observer = ClientObserver();
           final mockBrokenSession = MockSessionBrokeException();
-          final testClientException =
-              TestSessionBrokenClient(
+          final testClientException = TestSessionBrokenClient(
             client: mockBrokenSession,
             id: 'MockSessionBrokeException',
           )..addObserver(observer);
