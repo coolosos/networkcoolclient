@@ -37,7 +37,7 @@ class HttpClient extends BaseClient with NetworkObservable {
   /// specify a value for the same key.
   @override
   Map<String, String> normalizeHeaders(Map<String, String>? headers) {
-    final Map<String, String> clientHeaders = Map.of(defaultHeaders ?? {});
+    final clientHeaders = Map<String, String>.of(defaultHeaders ?? {});
 
     // Override the [defaultHeaders] with the headers send by the execution.
     clientHeaders.addAll(headers ?? {});

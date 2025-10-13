@@ -40,7 +40,7 @@ void main() {
       test(
         'BaseClientTest normalize function put call headers',
         () async {
-          final BaseClientTest normalizeClient = BaseClientTest(
+          final normalizeClient = BaseClientTest(
             client: MockSuccessRequestClient(),
             id: 'normalizeClient',
           );
@@ -69,7 +69,7 @@ void main() {
       test(
         'toString function',
         () async {
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
@@ -83,12 +83,12 @@ void main() {
       test(
         'Operator == different ',
         () async {
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
 
-          final TestHttpClient infinityClient = TestHttpClient(
+          final infinityClient = TestHttpClient(
             client: MockInfinityRequestClient(),
             id: 'infinityClient',
           );
@@ -101,12 +101,12 @@ void main() {
       test(
         'Operator == same id',
         () async {
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
 
-          final TestHttpClient infinityClient = TestHttpClient(
+          final infinityClient = TestHttpClient(
             client: MockInfinityRequestClient(),
             id: 'successRequestHttpClient',
           );
@@ -119,11 +119,11 @@ void main() {
       test(
         'Operator == identical',
         () async {
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
-          final TestHttpClient successRequestHttpClientIdentical =
+          final successRequestHttpClientIdentical =
               TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
@@ -139,7 +139,7 @@ void main() {
       test(
         'hashCode',
         () async {
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           );
@@ -152,12 +152,12 @@ void main() {
       );
 
       final observer = ClientObserver();
-      final TestHttpClient observerChecker = TestHttpClient(
+      final observerChecker = TestHttpClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
 
-      final TestHttpClient noObserverChecker = TestHttpClient(
+      final noObserverChecker = TestHttpClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
@@ -186,12 +186,12 @@ void main() {
       );
 
       final globalObserver = ClientObserver();
-      final TestHttpClient globalObserverChecker = TestHttpClient(
+      final globalObserverChecker = TestHttpClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
 
-      final TestHttpClient noGlobalObserverChecker = TestHttpClient(
+      final noGlobalObserverChecker = TestHttpClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );

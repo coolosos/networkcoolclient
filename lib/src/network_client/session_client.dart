@@ -66,7 +66,7 @@ abstract base class SessionClient extends HttpClient {
     headers = Map.of(headers ?? {});
 
     // Attempt to retrieve the bearer token for the session.
-    String? bearerToken = await getBearerToken();
+    var bearerToken = await getBearerToken();
 
     // If no bearer token is available, attempt to renew the session.
     if (bearerToken?.isEmpty ?? true) {
@@ -111,7 +111,7 @@ abstract base class SessionClient extends HttpClient {
     final head = await sessionHeaders(headers);
 
     // Attempt to execute the request with the prepared headers.
-    Response response = await super.executeRequest(headers: head, send: send);
+    var response = await super.executeRequest(headers: head, send: send);
 
     // If the session is invalid, attempt to renew the session.
     if (checkIfFailedForInvalidSession(response)) {

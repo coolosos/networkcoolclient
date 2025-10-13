@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:network_cool_client/network_cool_client.dart';
 
 class CustomNetworkObserver implements NetworkObserver {
@@ -48,8 +50,7 @@ class CustomNetworkObserver implements NetworkObserver {
     required StackTrace? stackTrace,
     required BaseClient client,
   }) {
-    // ignore: avoid_print
-    print('Error handle');
+    log('Error handle');
   }
 
   @override
@@ -57,8 +58,7 @@ class CustomNetworkObserver implements NetworkObserver {
     required OnResponse response,
     required BaseClient client,
   }) {
-    // ignore: avoid_print
-    print(response.body);
+    log(response.body ?? '');
   }
 
   @override

@@ -23,7 +23,7 @@ void main() {
         'Observer on response',
         () async {
           final observer = ClientObserver();
-          final TestHttpClient successRequestHttpClient = TestHttpClient(
+          final successRequestHttpClient = TestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'successRequestHttpClient',
           )..addObserver(observer);
@@ -43,7 +43,7 @@ void main() {
         'on change status',
         () async {
           final observer = ClientObserver();
-          final TestHttpClient underMantenance = TestHttpClient(
+          final underMantenance = TestHttpClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )..addObserver(observer);
@@ -64,7 +64,7 @@ void main() {
         'on error',
         () async {
           final observer = ClientObserver();
-          final TestHttpClient underMantenance = TestHttpClient(
+          final underMantenance = TestHttpClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )..addObserver(observer);
@@ -84,7 +84,7 @@ void main() {
         'on dispose',
         () async {
           final observer = ClientObserver();
-          final TestHttpClient underMantenance = TestHttpClient(
+          final underMantenance = TestHttpClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )..addObserver(observer);
@@ -105,7 +105,7 @@ void main() {
         () async {
           final observer = ClientObserver();
           final mockBrokenSession = MockSessionBrokeException();
-          final TestSessionBrokenClient testClientException =
+          final testClientException =
               TestSessionBrokenClient(
             client: mockBrokenSession,
             id: 'MockSessionBrokeException',

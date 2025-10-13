@@ -43,7 +43,7 @@ void main() {
   group(
     'Timeout',
     () {
-      final TestHttpClient testTimeOutClient = TestHttpClient(
+      final testTimeOutClient = TestHttpClient(
         client: MockInfinityRequestClient(),
         id: 'testTimeOutClient',
       );
@@ -136,7 +136,7 @@ void main() {
   group(
     'Successful',
     () {
-      final TestHttpClient testSuccessClient = TestHttpClient(
+      final testSuccessClient = TestHttpClient(
         client: MockSuccessRequestClient(),
         id: 'MockSuccessRequestClient',
       );
@@ -223,7 +223,7 @@ void main() {
   group(
     'Socket Exception',
     () {
-      final TestHttpClient testSocketException = TestHttpClient(
+      final testSocketException = TestHttpClient(
         client: MockSocketException(),
         id: 'MockSocketException',
       );
@@ -316,7 +316,7 @@ void main() {
   group(
     'Client Exception',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final testClientException = TestHttpClient(
         client: MockClientException(),
         id: 'MockClientException',
       );
@@ -409,7 +409,7 @@ void main() {
   group(
     'Client Undermantenance',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final testClientException = TestHttpClient(
         client: MockUndermantenanceClientException(),
         id: 'MockUndermantenanceClientException',
       );
@@ -506,11 +506,11 @@ void main() {
       test(
         'Test normalize function',
         () async {
-          final NormalizeTestHttpClient normalizeHeaders =
+          final normalizeHeaders =
               NormalizeTestHttpClient(
             client: MockSuccessRequestClient(),
             id: 'normalizeHeaders',
-            defaultHeaders: {
+            defaultHeaders: const {
               'key': 'key',
               'default': 'true',
             },
