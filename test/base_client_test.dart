@@ -5,8 +5,8 @@ import 'clients/mock_infinity_request_client.dart';
 import 'clients/mock_success_request_client.dart';
 import 'observer/client_observer.dart';
 
-final class TestHttpClient extends HttpClient {
-  TestHttpClient({
+final class TestNccClient extends NccClient {
+  TestNccClient({
     required super.client,
     required super.id,
     super.timeout = const Duration(milliseconds: 200),
@@ -70,31 +70,31 @@ void main() {
       test(
         'toString function',
         () async {
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
 
           expect(
-            successRequestHttpClient.toString(),
-            'BaseClient(id: ${successRequestHttpClient.id})',
+            successRequestNccClient.toString(),
+            'BaseClient(id: ${successRequestNccClient.id})',
           );
         },
       );
       test(
         'Operator == different ',
         () async {
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
 
-          final infinityClient = TestHttpClient(
+          final infinityClient = TestNccClient(
             client: MockInfinityRequestClient(),
             id: 'infinityClient',
           );
           expect(
-            successRequestHttpClient == infinityClient,
+            successRequestNccClient == infinityClient,
             false,
           );
         },
@@ -102,17 +102,17 @@ void main() {
       test(
         'Operator == same id',
         () async {
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
 
-          final infinityClient = TestHttpClient(
+          final infinityClient = TestNccClient(
             client: MockInfinityRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
           expect(
-            successRequestHttpClient == infinityClient,
+            successRequestNccClient == infinityClient,
             true,
           );
         },
@@ -120,17 +120,17 @@ void main() {
       test(
         'Operator == identical',
         () async {
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
-          final successRequestHttpClientIdentical = TestHttpClient(
+          final successRequestNccClientIdentical = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
 
           expect(
-            successRequestHttpClient == successRequestHttpClientIdentical,
+            successRequestNccClient == successRequestNccClientIdentical,
             true,
           );
         },
@@ -139,25 +139,25 @@ void main() {
       test(
         'hashCode',
         () async {
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           );
 
           expect(
-            successRequestHttpClient.hashCode > 0,
+            successRequestNccClient.hashCode > 0,
             true,
           );
         },
       );
 
       final observer = ClientObserver();
-      final observerChecker = TestHttpClient(
+      final observerChecker = TestNccClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
 
-      final noObserverChecker = TestHttpClient(
+      final noObserverChecker = TestNccClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
@@ -186,12 +186,12 @@ void main() {
       );
 
       final globalObserver = ClientObserver();
-      final globalObserverChecker = TestHttpClient(
+      final globalObserverChecker = TestNccClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );
 
-      final noGlobalObserverChecker = TestHttpClient(
+      final noGlobalObserverChecker = TestNccClient(
         client: MockSuccessRequestClient(),
         id: 'observerChecker',
       );

@@ -37,7 +37,7 @@ dart pub get
 ### Basic usage
 
 ```dart
-final client = HttpClient(
+final client = NccClient(
   id: 'base-client',
   client: http.Client(),
 );

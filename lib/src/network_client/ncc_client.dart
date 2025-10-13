@@ -5,15 +5,15 @@ part of 'base_client.dart';
 /// This class is a custom implementation of a network client that supports automatic
 /// network state updates (e.g., online, offline, under maintenance) based on the
 /// server response. It uses a timeout and manages custom headers in each request.
-class HttpClient extends BaseClient with NetworkObservable {
-  /// Creates a new [HttpClient] instance.
+class NccClient extends BaseClient with NetworkObservable {
+  /// Creates a new [NccClient] instance.
   ///
   /// [client] is the underlying HTTP client used to send requests.
   /// [id] is a unique identifier for this client instance.
   /// [timeout] specifies the duration to wait for a server response before timing out (default is 30 seconds).
   /// [defaultHeaders] contains headers that will be sent with every request, but can be overridden by custom headers.
   /// [observers] - Observers that listener every request.
-  HttpClient({
+  NccClient({
     required super.client,
     required super.id,
     this.timeout = const Duration(seconds: 30),

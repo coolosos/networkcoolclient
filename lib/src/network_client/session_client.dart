@@ -27,7 +27,7 @@ class _ConcurrencyManager {
 /// Abstract class representing an HTTP client that handles session management,
 /// including token renewal and invalid session handling.
 @immutable
-abstract base class SessionClient extends HttpClient {
+abstract base class SessionClient extends NccClient {
   /// Constructor for initializing the session client with the necessary parameters.
   /// [id] - The identifier for the client, used to track session state.
   /// [client] - The actual HTTP client used to send requests.

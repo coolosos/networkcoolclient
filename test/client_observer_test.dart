@@ -7,8 +7,8 @@ import 'clients/mock_undermantenance_client_exception.dart';
 import 'observer/client_observer.dart';
 import 'session_client_test.dart';
 
-final class TestHttpClient extends HttpClient {
-  TestHttpClient({
+final class TestNccClient extends NccClient {
+  TestNccClient({
     required super.client,
     required super.id,
     super.timeout = const Duration(milliseconds: 200),
@@ -23,12 +23,12 @@ void main() {
         'Observer on response',
         () async {
           final observer = ClientObserver();
-          final successRequestHttpClient = TestHttpClient(
+          final successRequestNccClient = TestNccClient(
             client: MockSuccessRequestClient(),
-            id: 'successRequestHttpClient',
+            id: 'successRequestNccClient',
           )..addObserver(observer);
           try {
-            await successRequestHttpClient.get(
+            await successRequestNccClient.get(
               Uri.dataFromString('test_dart.es'),
               headers: {'key': 'key'},
             );
@@ -43,7 +43,7 @@ void main() {
         'on change status',
         () async {
           final observer = ClientObserver();
-          final underMantenance = TestHttpClient(
+          final underMantenance = TestNccClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )..addObserver(observer);
@@ -64,7 +64,7 @@ void main() {
         'on error',
         () async {
           final observer = ClientObserver();
-          final underMantenance = TestHttpClient(
+          final underMantenance = TestNccClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )..addObserver(observer);
@@ -84,7 +84,7 @@ void main() {
         'on dispose',
         () async {
           final observer = ClientObserver();
-          final underMantenance = TestHttpClient(
+          final underMantenance = TestNccClient(
             client: MockUndermantenanceClientException(),
             id: 'underMantenance',
           )

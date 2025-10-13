@@ -9,11 +9,12 @@ import 'package:meta/meta.dart';
 
 import '../network_exceptions.dart';
 import '../network_observer/network_observer.dart';
+import '../network_observer/on_response.dart';
 import '../network_state.dart';
 import 'session_state_manager.dart';
 
 part 'client_methods.dart';
-part 'http_client.dart';
+part 'ncc_client.dart';
 part 'network_observable.dart';
 part 'session_client.dart';
 

@@ -19,7 +19,7 @@ class CustomNetworkObserver implements NetworkObserver {
     required NetworkState currentState,
     required BaseClient client,
   }) {
-    if ((client.runtimeType == HttpClient) || (previousState == currentState)) {
+    if ((client.runtimeType == NccClient) || (previousState == currentState)) {
       return;
     }
 
