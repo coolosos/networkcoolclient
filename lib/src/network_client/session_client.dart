@@ -4,8 +4,8 @@ class _ConcurrencyManager {
   final _renewalFutures = <String, Future<void>>{};
 
   Future<void> execute(String id, Future<void> Function() renewFn) {
-    if (_renewalFutures.containsKey(id)) {
-      return _renewalFutures[id]!;
+    if (_renewalFutures[id] case final renewal?) {
+      return renewal;
     }
 
     final renewalFuture = renewFn();
@@ -17,8 +17,8 @@ class _ConcurrencyManager {
   }
 
   Future<void> awaitRenewal(String id) {
-    if (_renewalFutures.containsKey(id)) {
-      return _renewalFutures[id]!;
+    if (_renewalFutures[id] case final renewal?) {
+      return renewal;
     }
     return Future.value();
   }
