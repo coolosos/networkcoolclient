@@ -723,6 +723,34 @@ void main() {
           mockBrokenSession.refreshSecondTime();
         },
       );
+
+      test(
+        'Get client Session Broken and then fixed',
+        () async {
+          final mockBrokenSession = MockSessionBrokeException();
+          final testClientException = TestSessionBrokenClient(
+            client: mockBrokenSession,
+            id: 'MockSessionBrokeExceptionFixed',
+          );
+
+          // First call fails and sets state to notLoggedIn
+          await expectLater(
+            () => testClientException.get(
+              Uri.dataFromString('test_dart.es'),
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+
+          // Second call should succeed and cover the missing line
+          final response = await testClientException.get(
+            Uri.dataFromString('test_dart.es'),
+          );
+          expect(response.statusCode, 200);
+        },
+      );
     },
   );
 
