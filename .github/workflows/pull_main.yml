@@ -1,15 +1,15 @@
 name: Validate
 on:
   pull_request:
-    branches: 
-        - 'main'
-    types: 
-        - ready_for_review
-        - synchronize
-        - opened
+    branches:
+      - "main"
+    types:
+      - ready_for_review
+      - synchronize
+      - opened
 
 jobs:
-  spellcheck: 
+  spellcheck:
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
@@ -21,14 +21,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5.0.0
-      - uses: dart-lang/setup-dart@v1
-
-      - run: dart pub get 
-
-      - run: dart analyze --fatal-warnings
-      - run: dart format lib --set-exit-if-changed  
-
-      - run: dart test --coverage=coverage
-      - run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=lib
-      - run: dart run .github/check_coverage/check_coverage.dart 90.0
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1.7.1
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze project
+        run: dart analyze --fatal-infos
+      - name: Format project
+        run: dart format lib --set-exit-if-changed
+      - name: Run tests with coverage
+        run: dart test --coverage=coverage
+      - name: Generate LCOV report
+        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=lib
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
+          fail_ci_if_error: true
