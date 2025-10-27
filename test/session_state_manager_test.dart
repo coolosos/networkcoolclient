@@ -1,4 +1,4 @@
-import 'package:network_cool_client/src/network_client/session_state_manager.dart';
+import 'package:ncc/src/network_client/session_state_manager.dart';
 import 'package:test/test.dart';
 
 final class _TestSessionStateManager extends SessionStateManager {
