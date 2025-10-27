@@ -10,12 +10,6 @@
 - Upgrade meta: ">=1.16.0 <2.0.0"
 - Upgrade coolint: ^2.1.2
 
-
-
-## 0.0.5 - 2025-07-16
-### Breaking change
-- Manage of socket exception as NetworkAvailabilityException
-
 ## 0.0.5 - 2025-07-16
 ### Breaking change
 - Manage of socket exception as NetworkAvailabilityException
