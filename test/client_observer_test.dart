@@ -1,4 +1,4 @@
-import 'package:network_cool_client/network_cool_client.dart';
+import 'package:ncc/network_cool_client.dart';
 import 'package:test/test.dart';
 
 import 'clients/mock_session_broke_exception.dart';

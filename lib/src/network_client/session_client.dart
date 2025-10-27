@@ -95,7 +95,7 @@ abstract base class SessionClient extends NccClient {
 
     // If no bearer token is available, attempt to renew the session.
     if (bearerToken?.isEmpty ?? true) {
-      await _renewSession();
+      await _renewSession(); //! Will throw NotLoggedInException if session cannot be renewed
       bearerToken = await getBearerToken();
     }
 
@@ -142,7 +142,7 @@ abstract base class SessionClient extends NccClient {
 
     // If the session is invalid, attempt to renew the session.
     if (checkIfFailedForInvalidSession(response)) {
-      await _renewSession();
+      await _renewSession(); //! Will throw NotLoggedInException if session cannot be renewed
       final headWithNewSession = await sessionHeaders(headers);
       response = await super.executeRequest(
         headers: headWithNewSession,

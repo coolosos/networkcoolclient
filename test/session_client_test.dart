@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:network_cool_client/network_cool_client.dart';
+import 'package:ncc/network_cool_client.dart';
 
 import 'package:test/test.dart';
 
@@ -622,8 +622,7 @@ void main() {
     'Client Session Broken',
     () {
       final mockBrokenSession = MockSessionBrokeException();
-      final testClientException =
-          TestSessionBrokenClient(
+      final testClientException = TestSessionBrokenClient(
         client: mockBrokenSession,
         id: 'MockSessionBrokeException',
       );
@@ -761,8 +760,7 @@ void main() {
       test(
         'Bearer token Fail',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: MockSessionBrokeException(),
             id: 'MockSessionBrokeException',
@@ -774,8 +772,7 @@ void main() {
       test(
         'Bearer token Fail with other headers',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: MockSessionBrokeException(),
             id: 'MockSessionBrokeException',
@@ -788,8 +785,7 @@ void main() {
       test(
         'Bearer token Success',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: 'token',
             client: MockSessionBrokeException(),
             id: 'MockSessionBrokeException',
@@ -803,8 +799,7 @@ void main() {
       test(
         'Bearer token Success with defaultHeaders',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: 'token',
             client: MockSessionBrokeException(),
             id: 'MockSessionBrokeException',
@@ -828,8 +823,7 @@ void main() {
       test(
         'Get Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
@@ -846,8 +840,7 @@ void main() {
       test(
         'Post Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
@@ -864,8 +857,7 @@ void main() {
       test(
         'Delete Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
@@ -882,8 +874,7 @@ void main() {
       test(
         'Head Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
@@ -900,8 +891,7 @@ void main() {
       test(
         'Patch Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
@@ -918,8 +908,7 @@ void main() {
       test(
         'Put Cookie saved',
         () async {
-          final testClientException =
-              TestSessionBearerClient(
+          final testClientException = TestSessionBearerClient(
             bearerToken: null,
             client: client,
             id: 'MockSaveCookieClient',
