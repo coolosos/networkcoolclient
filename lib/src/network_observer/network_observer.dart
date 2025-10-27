@@ -1,6 +1,6 @@
 import '../network_client/base_client.dart';
-import 'on_response.dart';
 import '../network_state.dart';
+import 'on_response.dart';
 
 /// An abstract interface that defines the methods for observing network events
 /// and responses in the context of a `BaseClient`. Implementing this interface

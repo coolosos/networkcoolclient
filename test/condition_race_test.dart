@@ -39,7 +39,7 @@ void main() {
   group(
     'Condition Race',
     () {
-      final TestSessionBearerClient testConditionRace = TestSessionBearerClient(
+      final testConditionRace = TestSessionBearerClient(
         client: client,
         id: 'testSessionBearerClient',
         bearerToken: 'AwesomeBearToken',

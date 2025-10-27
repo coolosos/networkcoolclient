@@ -2,20 +2,21 @@ library;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io' show SocketException, HttpStatus, HttpHeaders;
+import 'dart:io' show HttpHeaders, HttpStatus, SocketException;
 
 import 'package:http/http.dart';
-import '../network_observer/network_observer.dart';
-import '../network_observer/on_response.dart';
-import '../network_state.dart';
 import 'package:meta/meta.dart';
 
 import '../network_exceptions.dart';
+import '../network_observer/network_observer.dart';
+import '../network_observer/on_response.dart';
+import '../network_state.dart';
+import 'session_state_manager.dart';
 
 part 'client_methods.dart';
-part 'http_client.dart';
-part 'session_client.dart';
+part 'ncc_client.dart';
 part 'network_observable.dart';
+part 'session_client.dart';
 
 /// A typedef representing a function that sends an HTTP request
 /// using the provided headers and returns a [Future<Response>].
@@ -32,6 +33,7 @@ typedef RequestSender = Future<Response> Function(Map<String, String> headers);
 /// Subclasses must implement [executeRequest] to define how requests
 /// are handled, including custom behavior such as logging, header manipulation,
 /// retry logic, etc.
+@immutable
 abstract class BaseClient implements ClientMethods {
   /// Creates a new [BaseClient] with the given [client] and unique [id].
   ///

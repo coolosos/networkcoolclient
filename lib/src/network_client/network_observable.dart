@@ -61,12 +61,12 @@ mixin NetworkObservable on BaseClient {
 
     // Check if a re-login is needed or if the state is actually unchanged.
     final isActuallyReLogin = _isActuallyReLogin(previousState, newState);
-    if ((newState == previousState || isActuallyReLogin)) {
+    if (newState == previousState || isActuallyReLogin) {
       return;
     }
 
     // Notify all observers about the network status change.
-    for (var observer in _observers) {
+    for (final observer in _observers) {
       observer.onChangeNetworkStatus(
         client: this,
         previousState: previousState,
@@ -105,7 +105,7 @@ mixin NetworkObservable on BaseClient {
     );
 
     // Notify all observers about the received response.
-    for (var observer in _observers) {
+    for (final observer in _observers) {
       observer.onResponse(
         response: onResponse,
         client: this,
@@ -123,7 +123,7 @@ mixin NetworkObservable on BaseClient {
     StackTrace? stackTrace,
   }) {
     // Notify all observers about the error that occurred.
-    for (var observer in _observers) {
+    for (final observer in _observers) {
       observer.onError(
         error: error,
         stackTrace: stackTrace,
@@ -152,7 +152,7 @@ mixin NetworkObservable on BaseClient {
   /// This does not affect global observers registered in [GlobalNetworkObservable].
   @mustCallSuper
   void dispose() {
-    for (var observer in _localNetworkObservers) {
+    for (final observer in _localNetworkObservers) {
       observer.dispose();
     }
     _localNetworkObservers.clear();
@@ -191,7 +191,7 @@ final class GlobalNetworkObservable {
   /// This method should be called when global observation is no longer needed,
   /// such as during application shutdown or test teardown.
   static void dispose() {
-    for (var observer in _observers) {
+    for (final observer in _observers) {
       observer.dispose();
     }
     _observers.clear();

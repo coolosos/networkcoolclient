@@ -10,8 +10,8 @@ import 'clients/mock_socket_exception.dart';
 import 'clients/mock_success_request_client.dart';
 import 'clients/mock_undermantenance_client_exception.dart';
 
-final class TestHttpClient extends HttpClient {
-  TestHttpClient({
+final class TestNccClient extends NccClient {
+  TestNccClient({
     required super.client,
     required super.id,
     super.timeout = const Duration(milliseconds: 200),
@@ -19,8 +19,9 @@ final class TestHttpClient extends HttpClient {
   });
 }
 
-final class NormalizeTestHttpClient extends TestHttpClient {
-  NormalizeTestHttpClient({
+// ignore: must_be_immutable reason: test
+final class NormalizeTestNccClient extends TestNccClient {
+  NormalizeTestNccClient({
     required super.client,
     required super.id,
     super.timeout = const Duration(milliseconds: 200),
@@ -43,7 +44,7 @@ void main() {
   group(
     'Timeout',
     () {
-      final TestHttpClient testTimeOutClient = TestHttpClient(
+      final testTimeOutClient = TestNccClient(
         client: MockInfinityRequestClient(),
         id: 'testTimeOutClient',
       );
@@ -136,7 +137,7 @@ void main() {
   group(
     'Successful',
     () {
-      final TestHttpClient testSuccessClient = TestHttpClient(
+      final testSuccessClient = TestNccClient(
         client: MockSuccessRequestClient(),
         id: 'MockSuccessRequestClient',
       );
@@ -223,7 +224,7 @@ void main() {
   group(
     'Socket Exception',
     () {
-      final TestHttpClient testSocketException = TestHttpClient(
+      final testSocketException = TestNccClient(
         client: MockSocketException(),
         id: 'MockSocketException',
       );
@@ -316,7 +317,7 @@ void main() {
   group(
     'Client Exception',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final testClientException = TestNccClient(
         client: MockClientException(),
         id: 'MockClientException',
       );
@@ -409,7 +410,7 @@ void main() {
   group(
     'Client Undermantenance',
     () {
-      final TestHttpClient testClientException = TestHttpClient(
+      final testClientException = TestNccClient(
         client: MockUndermantenanceClientException(),
         id: 'MockUndermantenanceClientException',
       );
@@ -506,11 +507,10 @@ void main() {
       test(
         'Test normalize function',
         () async {
-          final NormalizeTestHttpClient normalizeHeaders =
-              NormalizeTestHttpClient(
+          final normalizeHeaders = NormalizeTestNccClient(
             client: MockSuccessRequestClient(),
             id: 'normalizeHeaders',
-            defaultHeaders: {
+            defaultHeaders: const {
               'key': 'key',
               'default': 'true',
             },

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:network_cool_client/network_cool_client.dart';
 
-final class MyHttpClient extends HttpClient {
-  MyHttpClient()
+final class MyNccClient extends NccClient {
+  MyNccClient()
       : super(
           id: 'my-http-client',
           client: Client(),
@@ -19,11 +21,10 @@ final class MyHttpClient extends HttpClient {
 }
 
 void main() async {
-  final client = MyHttpClient();
+  final client = MyNccClient();
 
   final response = await client
       .get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
 
-  // ignore: avoid_print
-  print(response.body);
+  log(response.body);
 }

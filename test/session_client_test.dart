@@ -80,7 +80,7 @@ void main() {
   group(
     'Timeout',
     () {
-      final TestSessionClient testTimeOutClient = TestSessionClient(
+      final testTimeOutClient = TestSessionClient(
         client: MockInfinityRequestClient(),
         id: 'testTimeOutClient',
       );
@@ -173,7 +173,7 @@ void main() {
   group(
     'Successful',
     () {
-      final TestSessionClient testSuccessClient = TestSessionClient(
+      final testSuccessClient = TestSessionClient(
         client: MockSuccessRequestClient(),
         id: 'MockSuccessRequestClient',
       );
@@ -260,7 +260,7 @@ void main() {
   group(
     'Socket Exception',
     () {
-      final TestSessionClient testSocketException = TestSessionClient(
+      final testSocketException = TestSessionClient(
         client: MockSocketException(),
         id: 'MockSocketException',
       );
@@ -353,7 +353,7 @@ void main() {
   group(
     'Client Exception',
     () {
-      final TestSessionClient testClientException = TestSessionClient(
+      final testClientException = TestSessionClient(
         client: MockClientException(),
         id: 'MockClientException',
       );
@@ -446,7 +446,7 @@ void main() {
   group(
     'Client Undermantenance',
     () {
-      final TestSessionClient testClientException = TestSessionClient(
+      final testClientException = TestSessionClient(
         client: MockUndermantenanceClientException(),
         id: 'MockUndermantenanceClientException',
       );
@@ -540,7 +540,7 @@ void main() {
     'Client Session Broke Fixed',
     () {
       final mockBrokenSession = MockSessionBrokeException();
-      final TestSessionClient testClientException = TestSessionClient(
+      final testClientException = TestSessionClient(
         client: mockBrokenSession,
         id: 'MockSessionBrokeException',
       );
@@ -622,7 +622,7 @@ void main() {
     'Client Session Broken',
     () {
       final mockBrokenSession = MockSessionBrokeException();
-      final TestSessionBrokenClient testClientException =
+      final testClientException =
           TestSessionBrokenClient(
         client: mockBrokenSession,
         id: 'MockSessionBrokeException',
@@ -723,6 +723,34 @@ void main() {
           mockBrokenSession.refreshSecondTime();
         },
       );
+
+      test(
+        'Get client Session Broken and then fixed',
+        () async {
+          final mockBrokenSession = MockSessionBrokeException();
+          final testClientException = TestSessionBrokenClient(
+            client: mockBrokenSession,
+            id: 'MockSessionBrokeExceptionFixed',
+          );
+
+          // First call fails and sets state to notLoggedIn
+          await expectLater(
+            () => testClientException.get(
+              Uri.dataFromString('test_dart.es'),
+            ),
+            throwsA(
+              isA<NotLoggedInException>(),
+            ),
+          );
+          expect(mockBrokenSession.count, 1);
+
+          // Second call should succeed and cover the missing line
+          final response = await testClientException.get(
+            Uri.dataFromString('test_dart.es'),
+          );
+          expect(response.statusCode, 200);
+        },
+      );
     },
   );
 
@@ -733,7 +761,7 @@ void main() {
       test(
         'Bearer token Fail',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: MockSessionBrokeException(),
@@ -746,7 +774,7 @@ void main() {
       test(
         'Bearer token Fail with other headers',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: MockSessionBrokeException(),
@@ -760,7 +788,7 @@ void main() {
       test(
         'Bearer token Success',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: 'token',
             client: MockSessionBrokeException(),
@@ -775,7 +803,7 @@ void main() {
       test(
         'Bearer token Success with defaultHeaders',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: 'token',
             client: MockSessionBrokeException(),
@@ -795,12 +823,12 @@ void main() {
   group(
     'Cookie saved',
     () {
-      const String cookie = 'cookie';
+      const cookie = 'cookie';
       final client = MockSaveCookieClient(cookie: cookie);
       test(
         'Get Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,
@@ -818,7 +846,7 @@ void main() {
       test(
         'Post Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,
@@ -836,7 +864,7 @@ void main() {
       test(
         'Delete Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,
@@ -854,7 +882,7 @@ void main() {
       test(
         'Head Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,
@@ -872,7 +900,7 @@ void main() {
       test(
         'Patch Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,
@@ -890,7 +918,7 @@ void main() {
       test(
         'Put Cookie saved',
         () async {
-          final TestSessionBearerClient testClientException =
+          final testClientException =
               TestSessionBearerClient(
             bearerToken: null,
             client: client,

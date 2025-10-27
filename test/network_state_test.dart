@@ -8,7 +8,7 @@ void main() {
       test(
         'resolve',
         () {
-          for (var element in NetworkState.values) {
+          for (final element in NetworkState.values) {
             final resolve = element.resolve<NetworkState>(
               onUnderMaintenance: () {
                 return NetworkState.underMaintenance;
