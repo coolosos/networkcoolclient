@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:ncc/network_cool_client.dart';
+import 'package:ncc/ncc.dart';
 
 import '../observer/custom_network_observer.dart';
 

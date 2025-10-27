@@ -1,4 +1,4 @@
-import 'package:ncc/network_cool_client.dart';
+import 'package:ncc/ncc.dart';
 
 import 'mock_client.dart';
 
