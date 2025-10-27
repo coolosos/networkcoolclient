@@ -45,7 +45,7 @@ dart pub get
 
 ```dart
 final client = NccClient(
-  id: 'base-client',
+  id: 'ncc-client',
   client: http.Client(),
 );
 
