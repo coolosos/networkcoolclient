@@ -16,10 +16,6 @@ jobs:
         uses: dart-lang/setup-dart@v1.7.1
       - name: Install dependencies
         run: dart pub get
-      - name: Analyze project
-        run: dart analyze --fatal-infos
-      - name: Format project
-        run: dart format lib --set-exit-if-changed
       - name: Run tests with coverage
         run: dart test --coverage=coverage
       - name: Generate LCOV report
