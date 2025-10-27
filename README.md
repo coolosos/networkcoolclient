@@ -2,11 +2,11 @@
 
 A robust Dart package for efficient network request handling, session management, real-time network state tracking, and seamless error handling for modern applications.
 
-<!-- [![Pub Version](https://badgen.net/pub/v/network_cool_client)](https://pub.dev/packages/network_cool_client/)
+[![Pub Version](https://badgen.net/pub/v/network_cool_client)](https://pub.dev/packages/network_cool_client/)
 [![Pub Likes](https://badgen.net/pub/likes/network_cool_client)](https://pub.dev/packages/network_cool_client/score)
 [![Pub Points](https://badgen.net/pub/points/network_cool_client)](https://pub.dev/packages/network_cool_client/score)
 [![Pub Downloads](https://badgen.net/pub/dm/network_cool_client)](https://pub.dev/packages/network_cool_client)
-[![Dart SDK Version](https://badgen.net/pub/sdk-version/network_cool_client)](https://pub.dev/packages/network_cool_client/) -->
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/network_cool_client)](https://pub.dev/packages/network_cool_client/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/coolosos/network_cool_client/blob/main/LICENSE)
 [![](https://img.shields.io/badge/linted%20by-coolint-0553B1)](https://pub.dev/packages/coolint)
 [![codecov](https://codecov.io/gh/coolosos/networkcoolclient/graph/badge.svg)](https://codecov.io/gh/coolosos/networkcoolclient)
