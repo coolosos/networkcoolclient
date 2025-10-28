@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ncc/network_cool_client.dart';
+import 'package:ncc/ncc.dart';
 
 import 'package:test/test.dart';
 

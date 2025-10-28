@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:meta/meta.dart';
-import 'package:ncc/network_cool_client.dart';
+import 'package:ncc/ncc.dart';
 import 'package:test/fake.dart';
 
 base class MockClient extends Fake implements Client {
